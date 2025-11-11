@@ -34,6 +34,10 @@ class Compilador:
         self.next_register += 1
         return reg
     
+    def get_var_name(self, var: str) -> str:
+        """Convierte el nombre de variable a formato v_* para DATA"""
+        return f"v_{var}"
+    
     def add_instruction(self, instruction: str):
         """Agrega una instrucción al código assembly"""
         self.assembly_code.append(instruction)
@@ -41,12 +45,14 @@ class Compilador:
     
     def load_variable(self, var: str, reg: str):
         """Carga una variable desde memoria a un registro"""
-        self.add_instruction(f"MOV {reg}, ({var})")
+        var_name = self.get_var_name(var)
+        self.add_instruction(f"MOV {reg}, ({var_name})")
         self.memory_accesses += 1
     
     def store_variable(self, var: str, reg: str):
         """Almacena un registro en una variable de memoria"""
-        self.add_instruction(f"MOV ({var}), {reg}")
+        var_name = self.get_var_name(var)
+        self.add_instruction(f"MOV ({var_name}), {reg}")
         self.memory_accesses += 1
     
     def add_operation(self, reg1: str, reg2: str, op: str):
@@ -184,9 +190,9 @@ class Compilador:
         code = "; Valores iniciales (cambiar por los valores reales al ejecutar)\n"
         code += "DATA:\n"
         for var in self.variables:
-            code += f"{var} 0\n"
-        code += "error 0\n"
-        code += "result 0\n"
+            code += f"{self.get_var_name(var)} 0\n"
+        code += "v_error 0\n"
+        code += "v_result 0\n"
         code += "\nCODE:\n"
         code += "\n".join(self.assembly_code)
         
