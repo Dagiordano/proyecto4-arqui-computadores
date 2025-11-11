@@ -14,7 +14,7 @@ class Compilador:
     def __init__(self):
         self.lines_count = 0
         self.memory_accesses = 0
-        self.registers = ['R0', 'R1', 'R2', 'R3', 'R4', 'R5', 'R6', 'R7']
+        self.registers = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
         self.next_register = 0
         self.assembly_code = []
         self.variables = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
