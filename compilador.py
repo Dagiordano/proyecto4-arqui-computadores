@@ -181,7 +181,8 @@ class Compilador:
         self.store_variable('result', result_reg)
         
         # Generar código completo con DATA section
-        code = "DATA:\n"
+        code = "; Valores iniciales (cambiar por los valores reales al ejecutar)\n"
+        code += "DATA:\n"
         for var in self.variables:
             code += f"{var} 0\n"
         code += "error 0\n"
@@ -206,8 +207,11 @@ def main():
         assembly, lines, memory = compilador.compile(expression)
         
         print(assembly)
-        print(f"\n; Líneas generadas: {lines}")
+        print(f"\n; Estadísticas:")
+        print(f"; Líneas generadas: {lines}")
         print(f"; Accesos a memoria: {memory}")
+        print(f"\n; NOTA: Los valores en DATA son iniciales (0).")
+        print(f";       Cambia los valores de las variables antes de ejecutar el código assembly.")
         
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
