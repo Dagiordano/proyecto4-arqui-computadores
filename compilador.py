@@ -41,12 +41,12 @@ class Compilador:
     
     def load_variable(self, var: str, reg: str):
         """Carga una variable desde memoria a un registro"""
-        self.add_instruction(f"LOAD {reg}, {var}")
+        self.add_instruction(f"MOV {reg}, ({var})")
         self.memory_accesses += 1
     
     def store_variable(self, var: str, reg: str):
         """Almacena un registro en una variable de memoria"""
-        self.add_instruction(f"STORE {var}, {reg}")
+        self.add_instruction(f"MOV ({var}), {reg}")
         self.memory_accesses += 1
     
     def add_operation(self, reg1: str, reg2: str, op: str):
@@ -137,7 +137,7 @@ class Compilador:
             elif token.isdigit() or (token.startswith('-') and token[1:].isdigit()):
                 # Constante
                 reg = self.get_register()
-                self.add_instruction(f"LOADI {reg}, {token}")
+                self.add_instruction(f"MOV {reg}, {token}")
                 stack.append(reg)
             elif token in ['+', '-']:
                 # Operación binaria
