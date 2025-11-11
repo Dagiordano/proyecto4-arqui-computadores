@@ -210,8 +210,7 @@ def main():
         print(f"\n; Estadísticas:")
         print(f"; Líneas generadas: {lines}")
         print(f"; Accesos a memoria: {memory}")
-        print(f"\n; NOTA: Los valores en DATA son iniciales (0).")
-        print(f";       Cambia los valores de las variables antes de ejecutar el código assembly.")
+        
         
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
